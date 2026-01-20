@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -380,43 +381,12 @@
         populateLocked('ads-grid', 'Ad Video');
         populateLocked('games-grid', 'Game');
 
-   <script>
-        function showLockPopup() {
-            const modal = document.getElementById('lockModal');
-            modal.classList.remove('hidden');
+        function alertLevel() {
+            alert("⚠️ Feature Locked!\nYou need to reach Level 2 to access this earning method.");
         }
 
-        function closePopup() {
-            const modal = document.getElementById('lockModal');
-            modal.classList.add('hidden');
-        }
-
-        async function shareLink() {
-            const shareData = {
-                title: 'Nep Trading',
-                text: 'Join me on Nep Trading and start earning today!',
-                url: document.getElementById('refLink').value
-            };
-
-            try {
-                if (navigator.share) {
-                    await navigator.share(shareData);
-                } else {
-                    // Fallback for desktop
-                    navigator.clipboard.writeText(shareData.url);
-                    alert('Link copied to clipboard! Share it with your friends.');
-                }
-            } catch (err) {
-                console.error('Error sharing:', err);
-            }
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('lockModal');
-            if (event.target == modal) {
-                closePopup();
-            }
+        function copyLink() {
+            alert("Referral link copied to clipboard!");
         }
     </script>
 </body>
