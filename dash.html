@@ -1,327 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Nep X Trading</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nep Trading Pro | Premium Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --accent-neon: #38bdf8;
+            --accent-purple: #818cf8;
+            --text-white: #f8fafc;
+            --text-dim: #94a3b8;
+            --success-glow: #22c55e;
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-body{
-    background:#0f172a;
-    color:#fff;
-}
+        /* Animated Background Elements */
+        .bg-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-neon);
+            filter: blur(150px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+            top: 10%;
+            left: -50px;
+        }
 
-/* HEADER */
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px;
-    background:#020617;
-}
-header h1{
-    font-size:20px;
-    color:#22c55e;
-}
-.profile{
-    text-align:right;
-}
-.profile i{
-    font-size:26px;
-    cursor:pointer;
-    color:#facc15;
-}
-.profile small{
-    display:block;
-    font-size:12px;
-    opacity:0.8;
-}
+        /* Professional Header */
+        nav {
+            backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.8);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--card-border);
+        }
 
-/* DASHBOARD */
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    padding:15px;
-}
-.card{
-    background:linear-gradient(135deg,#1e293b,#020617);
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 0 12px rgba(0,0,0,.4);
-}
-.card h3{
-    font-size:14px;
-    opacity:.8;
-}
-.card p{
-    font-size:18px;
-    font-weight:600;
-    margin-top:6px;
-    color:#22c55e;
-}
+        .back-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--card-border);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* WITHDRAW */
-.withdraw{
-    padding:0 15px 15px;
-}
-.withdraw button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:30px;
-    background:#22c55e;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-}
+        .back-btn:hover { border-color: var(--accent-neon); }
 
-/* SECTION */
-section{
-    padding:15px;
-}
-section h2{
-    margin-bottom:10px;
-    font-size:18px;
-    color:#38bdf8;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-/* TABLE */
-.table{
-    background:#020617;
-    border-radius:12px;
-    overflow:hidden;
-}
-.row{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    padding:10px;
-    border-bottom:1px solid #1e293b;
-    font-size:13px;
-    align-items:center;
-}
-.row.header{
-    background:#1e293b;
-    font-weight:600;
-}
-.row button{
-    padding:6px;
-    border:none;
-    border-radius:6px;
-    background:#22c55e;
-    cursor:pointer;
-    font-size:12px;
-}
-.offer{
-    color:#facc15;
-    font-size:11px;
-}
+        /* Hero Earning Card */
+        .main-earning-card {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
 
-/* REFERRAL */
-.ref-box{
-    background:linear-gradient(135deg,#020617,#1e293b);
-    padding:15px;
-    border-radius:12px;
-}
-.ref-box input{
-    width:100%;
-    padding:10px;
-    border-radius:8px;
-    border:none;
-    margin-top:8px;
-}
-.ref-box button{
-    width:100%;
-    margin-top:10px;
-    padding:12px;
-    border:none;
-    border-radius:30px;
-    background:#38bdf8;
-    font-weight:600;
-}
+        .main-earning-card .sticker {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px var(--accent-neon));
+            animation: bounce 2s infinite;
+        }
 
-/* LEVEL 2 ADS */
-.ads{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-}
-.ad{
-    background:#020617;
-    padding:15px;
-    border-radius:12px;
-    text-align:center;
-    filter:blur(2px);
-    position:relative;
-}
-.ad i{
-    font-size:30px;
-    margin-bottom:8px;
-}
-.lock{
-    position:absolute;
-    top:10px;
-    right:10px;
-    color:#f87171;
-}
-.ad button{
-    margin-top:8px;
-    padding:6px 10px;
-    border:none;
-    border-radius:6px;
-    background:#64748b;
-    color:#fff;
-}
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-/* CHARTS */
-.chart{
-    background:#020617;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:10px;
-}
-.bar{
-    height:6px;
-    background:#22c55e;
-    border-radius:10px;
-    animation:grow 3s infinite alternate;
-}
-@keyframes grow{
-    from{width:30%;}
-    to{width:90%;}
-}
+        .income-title { font-size: 1.1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .income-amount { font-size: 3rem; font-weight: 800; margin: 10px 0; color: var(--accent-neon); }
 
-/* FOOTER */
-footer{
-    padding:15px;
-    text-align:center;
-    font-size:12px;
-    opacity:.7;
-}
-</style>
+        /* Secondary Grid */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card-stat {
+            background: var(--glass-bg);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card-stat:hover { transform: scale(1.03); background: rgba(56, 189, 248, 0.05); }
+        .card-stat i { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent-purple); }
+        .card-stat p { font-size: 0.8rem; color: var(--text-dim); }
+        .card-stat h3 { font-size: 1.2rem; margin-top: 5px; color: var(--text-white); }
+
+        /* Buttons */
+        .btn-withdraw {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+            margin-bottom: 40px;
+        }
+
+        /* Auto Trading Table */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .trade-table-wrapper {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: rgba(255,255,255,0.05); padding: 15px; text-align: left; color: var(--text-dim); font-size: 0.8rem; }
+        td { padding: 18px 15px; border-bottom: 1px solid var(--card-border); font-size: 0.9rem; }
+
+        .offer-tag {
+            background: #ef4444;
+            color: white;
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 5px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        .btn-table {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-neon);
+            border: 1px solid var(--accent-neon);
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Locked Sections */
+        .locked-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .locked-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            filter: grayscale(1);
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--text-dim);
+        }
+
+        /* Referral Box */
+        .refer-section {
+            background: linear-gradient(45deg, #1e293b, #334155);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid var(--accent-neon);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .income-amount { font-size: 2rem; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            td, th { padding: 12px 8px; font-size: 0.8rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Nep X Trading</h1>
-    <div class="profile">
-        <i class="fa-solid fa-user-lock" onclick="profileNotice()"></i>
-        <small>Level 1</small>
-        <small>ID: nepuser30</small>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <button class="back-btn" onclick="history.back()"><i class="fas fa-chevron-left"></i> Home</button>
+        <div style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">NEP <span style="color:var(--accent-neon)">TRADING</span></div>
+        <i class="fas fa-bell" style="color: var(--text-dim)"></i>
+    </nav>
+
+    <div class="container">
+        
+        <div class="main-earning-card">
+            <div class="sticker">💰</div>
+            <p class="income-title">Today's Profit</p>
+            <h1 class="income-amount">NPR Rs. 1,200/-</h1>
+            <div style="color: var(--success-glow); font-size: 0.9rem;">
+                <i class="fas fa-arrow-up"></i> +12% from yesterday
+            </div>
+        </div>
+
+        <div class="grid-4">
+            <div class="card-stat">
+                <i class="fas fa-database"></i>
+                <p>Total Earning</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-bolt"></i>
+                <p>Weekly</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-user-friends"></i>
+                <p>Referral</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-wallet"></i>
+                <p>Monthly</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+        </div>
+
+        <button class="btn-withdraw" onclick="window.location.href='another.html'">
+            <i class="fas fa-arrow-down-to-bracket"></i> WITHDRAW NOW
+        </button>
+
+        <div class="section-header">
+            <h2><i class="fas fa-robot" style="color:var(--accent-neon)"></i> Auto Trading</h2>
+            <span style="font-size: 0.8rem; color: var(--accent-neon)">Live Market</span>
+        </div>
+
+        <div class="trade-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>INVEST</th>
+                        <th>PROFIT</th>
+                        <th>TIME</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="trade-rows">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="section-header" style="margin-top: 40px;">
+            <h2><i class="fas fa-film"></i> Watch Ads</h2>
+            <span style="color: var(--text-dim); font-size: 0.8rem;">Level 2 Req.</span>
+        </div>
+        <div class="locked-area" id="ads-grid"></div>
+
+        <div class="section-header" style="margin-top: 40px;">
+            <h2><i class="fas fa-gamepad"></i> Play Games</h2>
+        </div>
+        <div class="locked-area" id="games-grid"></div>
+
+        <div class="refer-section">
+            <h2 style="margin-bottom: 10px;">Refer & Earn</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Invite your friends and earn Rs. 300 instantly per referral.</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-family: monospace;">
+                neptrading.pro/ref?id=99283
+            </div>
+            <button class="btn-table" style="padding: 12px 30px;" onclick="copyLink()">Share Link</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: var(--accent-purple);">
+            <i class="fas fa-circle-info"></i> More features will unlock at Level 2
+        </div>
+
     </div>
-</header>
 
-<div class="dashboard">
-    <div class="card"><h3>Total Earning</h3><p>Rs. 12,850</p></div>
-    <div class="card"><h3>Today Earning</h3><p>Rs. 850</p></div>
-    <div class="card"><h3>Weekly Earning</h3><p>Rs. 4,200</p></div>
-    <div class="card"><h3>Referral Earning</h3><p>Rs. 1,500</p></div>
-</div>
+    <footer>
+        <div style="color: #22c55e; margin-bottom: 10px;">
+            <i class="fas fa-shield-halved"></i> Verified by Play Protect
+        </div>
+        <p>© 2026 Nep Trading. All rights reserved.</p>
+    </footer>
 
-<div class="withdraw">
-    <button onclick="location.href='withdraw.html'">Withdraw Now</button>
-</div>
+    <script>
+        // Data for Trading Table
+        const tradeData = [
+            { inv: 880, prof: 1428, offer: false },
+            { inv: 1500, prof: 2385, offer: false },
+            { inv: 2500, prof: 3235, offer: false },
+            { inv: 3500, prof: 4885, offer: false },
+            { inv: 5500, prof: 7160, offer: true },
+            { inv: 8700, prof: 12385, offer: true },
+            { inv: 9500, prof: 15292, offer: true }
+        ];
 
-<section>
-<h2>Trading Investments</h2>
-<div class="table">
-<div class="row header">
-    <div>Invest</div><div>Profit</div><div>Time</div><div>Action</div>
-</div>
-
-<script>
-const plans=[
-[880,1428,"15 min",""],
-[1500,2385,"10 min",""],
-[2500,3235,"20 min",""],
-[3500,4885,"30 min",""],
-[5500,7160,"10 min","🔥 OFFER"],
-[8700,12385,"5 min","🔥 OFFER"],
-[9500,15292,"10 min","🔥 OFFER"]
-];
-plans.forEach(p=>{
-document.write(`
-<div class="row">
-<div>Rs.${p[0]}<br><span class="offer">${p[3]}</span></div>
-<div>Rs.${p[1]}</div>
-<div>${p[2]}</div>
-<div><button onclick="location.href='another.html'">Invest</button></div>
-</div>
-`);
-});
-</script>
-</div>
-</section>
-
-<section>
-<h2>Earn with Referral</h2>
-<div class="ref-box">
-<p>Refer friends & earn <b>Rs.300</b> per person</p>
-<p>Your Referral Code: <b>D390</b></p>
-<input value="https://nepxtrading.com/ref/D390" readonly>
-<button onclick="share()">Refer Now</button>
-</div>
-</section>
-
-<section>
-<h2>Level 2 – Watch Ads & Earn</h2>
-<p>Earn Rs.160 per ad (Locked)</p>
-<div class="ads">
-<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
-<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
-<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
-<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
-</div>
-</section>
-
-<section>
-<h2>Live Charts</h2>
-<div class="chart">Live Users <div class="bar"></div></div>
-<div class="chart">Bitcoin Price <div class="bar"></div></div>
-<div class="chart">Trading Profit <div class="bar"></div></div>
-</section>
-
-<section>
-<p>⚠ Other features will be unlocked after reaching <b>Level 2</b></p>
-<p>✅ Verified License | Secure Platform | Trusted in Nepal</p>
-</section>
-
-<footer>
-© 2025 Nep X Trading | All Rights Reserved
-</footer>
-
-<script>
-function profileNotice(){
-    alert("Profile will be unlocked at Level 2");
-}
-function locked(){
-    alert("This feature is available after Level 2");
-}
-function share(){
-    if(navigator.share){
-        navigator.share({
-            title:'Nep X Trading',
-            text:'Join & earn online in Nepal',
-            url:'https://nepxtrading.com/ref/D390'
+        const tableBody = document.getElementById('trade-rows');
+        tradeData.forEach(item => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>Rs. ${item.inv}${item.offer ? '<span class="offer-tag">HOT</span>' : ''}</td>
+                    <td style="color:var(--success-glow)">Rs. ${item.prof}</td>
+                    <td>10 min</td>
+                    <td><button class="btn-table" onclick="window.location.href='another.html'">Invest</button></td>
+                </tr>
+            `;
         });
-    }else{
-        alert("Copy and share the referral link manually");
-    }
-}
-</script>
 
+        // Function to create locked boxes
+        function populateLocked(containerId, label) {
+            const container = document.getElementById(containerId);
+            for(let i=1; i<=10; i++) {
+                container.innerHTML += `
+                    <div class="locked-box" onclick="alertLevel()">
+                        <i class="fas fa-lock lock-overlay"></i>
+                        <div style="font-size: 1.5rem; margin-bottom: 10px;">💎</div>
+                        <p style="font-size: 0.7rem; color: var(--text-dim)">${label} ${i}</p>
+                        <button class="btn-table" style="font-size: 0.6rem; margin-top: 10px; width: 100%">UNLOCK</button>
+                    </div>
+                `;
+            }
+        }
+
+        populateLocked('ads-grid', 'Ad Video');
+        populateLocked('games-grid', 'Game');
+
+        function alertLevel() {
+            alert("⚠️ Feature Locked!\nYou need to reach Level 2 to access this earning method.");
+        }
+
+        function copyLink() {
+            alert("Referral link copied to clipboard!");
+        }
+    </script>
 </body>
 </html>
