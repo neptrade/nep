@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Money Earning Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#111827;
+  --primary:#22c55e;
+  --secondary:#38bdf8;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+
+body{
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:var(--text);
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  background:#020617;
+  border-bottom:1px solid #1e293b;
+}
+
+header h1{
+  font-size:20px;
+  color:var(--primary);
+}
+
+.profile{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:linear-gradient(45deg,#22c55e,#38bdf8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.container{
+  padding:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.card{
+  background:var(--card);
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+  transition:.3s;
+}
+.card:hover{transform:translateY(-5px)}
+
+.card h3{font-size:14px;color:var(--muted)}
+.card p{font-size:22px;font-weight:bold;margin-top:6px}
+
+.section{
+  margin-top:30px;
+}
+.section h2{
+  margin-bottom:15px;
+  font-size:18px;
+  color:var(--secondary);
+}
+
+.items{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+.item{
+  background:#020617;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #1e293b;
+}
+
+.item h4{font-size:15px;margin-bottom:8px}
+.item small{color:var(--muted)}
+button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:var(--primary);
+  color:#022c22;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+
+.ref-box{
+  background:#020617;
+  padding:15px;
+  border-radius:12px;
+  border:1px dashed #22c55e;
+}
+input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  background:#020617;
+  color:white;
+  margin-top:10px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>💰 Nep Trading </h1>
+  <div class="profile">U</div>
+</header>
+
+<div class="container">
+
+<!-- Earnings Cards -->
+<div class="grid">
+  <div class="card"><h3>Total Earning</h3><p id="total">NPR Rs 32140</p></div>
+  <div class="card"><h3>Today Earning</h3><p id="today">NPR Rs 1800</p></div>
+  <div class="card"><h3>Weekly Earning</h3><p>NPR 0</p></div>
+  <div class="card"><h3>Referral Earning</h3><p>NPR 0</p></div>
+</div>
+
+<!-- Ads -->
+<div class="section">
+<h2>🎬 Watch Ads & Earn (Rs 200)</h2>
+<div class="items">
+<script>
+for(let i=1;i<=10;i++){
+document.write(`
+<div class="item">
+<h4>Ad Video ${i}</h4>
+<small>Watch full video</small>
+<button onclick="earn(200)">Watch Now</button>
+</div>`);
+}
+</script>
+</div>
+</div>
+
+<!-- Games -->
+<div class="section">
+<h2>🎮 Play Games & Earn (Rs 300)</h2>
+<div class="items">
+<script>
+for(let i=1;i<=10;i++){
+document.write(`
+<div class="item">
+<h4>Game ${i}</h4>
+<small>Play & Win</small>
+<button onclick="earn(300)">Play Now</button>
+</div>`);
+}
+</script>
+</div>
+</div>
+
+<!-- Referral -->
+<div class="section">
+<h2>👥 Referral System (Rs 300 / Refer)</h2>
+<div class="ref-box">
+<p>Your Referral Link</p>
+<input value="https://earnapp.com/ref/USER123" readonly>
+<button onclick="earn(300)">Simulate Referral</button>
+</div>
+</div>
+
+<!-- Trading -->
+<div class="section">
+<h2>📈 Crypto Trading (Demo)</h2>
+<div class="item">
+<h4>BTC/USDT</h4>
+<small>Market: Live (Demo)</small>
+<button onclick="earn(500)">Trade Now</button>
+</div>
+</div>
+
+<!-- Betting -->
+<div class="section">
+<h2>🎯 Betting System (Demo)</h2>
+<div class="item">
+<h4>Sports Betting</h4>
+<small>Odds based earnings</small>
+<button onclick="earn(400)">Place Bet</button>
+</div>
+</div>
+
+<!-- Extra Methods -->
+<div class="section">
+<h2>🚀 More Earning Methods</h2>
+<div class="items">
+<script>
+const methods=[
+"Daily Check-in","Spin & Win","Task Completion","Survey",
+"Affiliate Marketing","Social Share","App Install",
+"Content Upload","Premium Membership","Leaderboard Bonus"
+];
+methods.forEach(m=>{
+document.write(`
+<div class="item">
+<h4>${m}</h4>
+<small>Earn rewards</small>
+<button onclick="earn(150)">Earn</button>
+</div>`);
+});
+</script>
+</div>
+</div>
+
+</div>
+
+<footer>
+Demo earning dashboard • Frontend only • No real money involved
+</footer>
+
+<script>
+let total=32140;
+let today=1800;
+
+function earn(amount){
+  total+=amount;
+  today+=amount;
+  document.getElementById("total").innerText="NPR "+total;
+  document.getElementById("today").innerText="NPR "+today;
+  alert("You earned NPR "+amount+" (Demo)");
+}
+</script>
+
+</body>
+</html>
