@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | NepTrading Verified</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .verified-badge {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: var(--text-dim); font-size: 14px; }
+
+        /* QR Section */
+        .qr-section {
+            text-align: center;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .qr-section img {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+        }
+
+        /* Input Controls */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input:focus { border-color: var(--primary); background: rgba(15, 23, 42, 0.9); }
+
+        /* Buttons */
+        .btn-container { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4); }
+
+        .btn-back {
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        .btn-back:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+        /* State management */
+        .hidden { display: none; }
+        
+        .fade-in { animation: slideUp 0.5s ease forwards; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .package-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            border: 1px solid var(--primary);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-tag {
+            display: inline-block;
+            background: var(--bg);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            margin-top: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .copy-tag:active { transform: scale(0.95); }
+
+        .status-msg {
+            text-align: center;
+            padding: 10px 0 25px 0;
+            color: #fbbf24;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card" id="mainCard">
+        <div class="header">
+            <div class="verified-badge">
+                <i class="fas fa-shield-check"></i> VERIFIED BY NEPTRADING
+            </div>
+            <h1 id="mainTitle">Purchase Package</h1>
+            <p class="subtitle" id="mainSubtitle">Scan and pay to generate your ID</p>
+        </div>
+
+        <div id="step1" class="fade-in">
+            <div class="qr-section">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PAYMENT_ID_12345" alt="QR Code">
+                <p style="color: #1e293b; margin-top: 12px; font-weight: 700; font-size: 13px;">
+                    <i class="fas fa-qrcode"></i> SCAN TO PAY
+                </p>
+            </div>
+
+            <div class="input-group">
+                <label>Upload Payment Screenshot</label>
+                <input type="file" id="screenshotInput" accept="image/*">
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" onclick="goToStep2()">
+                    Submit Payment <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="step2" class="hidden fade-in">
+            <div class="status-msg">
+                <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+                <p style="margin-top: 15px; font-weight: 600;">Status: Waiting for Approval</p>
+                <p style="font-size: 12px; opacity: 0.8; font-weight: 400;">Verification usually takes 2-5 minutes.</p>
+            </div>
+            
+            <div class="input-group">
+                <label>Agent Verification Code</label>
+                <input type="text" id="agentCode" placeholder="Enter 3-digit agent code">
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" onclick="verifyAgent()">
+                    Verify & Unlock ID
+                </button>
+                <button class="btn btn-back" onclick="backToStep1()">
+                    <i class="fas fa-chevron-left"></i> Go Back
+                </button>
+            </div>
+        </div>
+
+        <div id="step3" class="hidden fade-in">
+            <div class="package-box">
+                <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 5px;">Your Package ID is ready:</p>
+                <h2 style="font-size: 32px; color: #fff; text-shadow: 0 0 15px rgba(99,102,241,0.5);">Nep470</h2>
+                <div class="copy-tag" onclick="copyId()">
+                    <i class="far fa-copy"></i> Copy ID
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" style="background: var(--success);" onclick="redirectToLogin()">
+                    Go to Login <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-lock"></i> Secured by NepTrading Cloud Infrastructure
+        </div>
+    </div>
+</div>
+
+<script>
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const title = document.getElementById('mainTitle');
+    const subtitle = document.getElementById('mainSubtitle');
+
+    function goToStep2() {
+        const file = document.getElementById('screenshotInput').files[0];
+        if (!file) {
+            alert("Please upload the payment screenshot first.");
+            return;
+        }
+        
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
+        title.innerText = "Verifying Payment";
+        subtitle.innerText = "Enter agent code to confirm identity";
+    }
+
+    function backToStep1() {
+        step2.classList.add('hidden');
+        step1.classList.remove('hidden');
+        title.innerText = "Purchase Package";
+        subtitle.innerText = "Scan and pay to generate your ID";
+    }
+
+    function verifyAgent() {
+        const code = document.getElementById('agentCode').value;
+        if (code === "890") {
+            step2.classList.add('hidden');
+            step3.classList.remove('hidden');
+            title.innerText = "Success!";
+            subtitle.innerText = "Your account is now verified";
+        } else {
+            alert("❌ Incorrect Agent Code. Please contact your manager.");
+        }
+    }
+
+    function copyId() {
+        navigator.clipboard.writeText("Nep470");
+        const copyBtn = document.querySelector('.copy-tag');
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy ID';
+        }, 2000);
+    }
+
+    function redirectToLogin() {
+        // This will redirect to your other file
+        window.location.href = "another.html";
+    }
+</script>
+
+</body>
+</html>
