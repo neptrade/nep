@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nep X Trading</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f172a;
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:#020617;
+}
+header h1{
+    font-size:20px;
+    color:#22c55e;
+}
+.profile{
+    text-align:right;
+}
+.profile i{
+    font-size:26px;
+    cursor:pointer;
+    color:#facc15;
+}
+.profile small{
+    display:block;
+    font-size:12px;
+    opacity:0.8;
+}
+
+/* DASHBOARD */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:15px;
+}
+.card{
+    background:linear-gradient(135deg,#1e293b,#020617);
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 0 12px rgba(0,0,0,.4);
+}
+.card h3{
+    font-size:14px;
+    opacity:.8;
+}
+.card p{
+    font-size:18px;
+    font-weight:600;
+    margin-top:6px;
+    color:#22c55e;
+}
+
+/* WITHDRAW */
+.withdraw{
+    padding:0 15px 15px;
+}
+.withdraw button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#22c55e;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* SECTION */
+section{
+    padding:15px;
+}
+section h2{
+    margin-bottom:10px;
+    font-size:18px;
+    color:#38bdf8;
+}
+
+/* TABLE */
+.table{
+    background:#020617;
+    border-radius:12px;
+    overflow:hidden;
+}
+.row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:10px;
+    border-bottom:1px solid #1e293b;
+    font-size:13px;
+    align-items:center;
+}
+.row.header{
+    background:#1e293b;
+    font-weight:600;
+}
+.row button{
+    padding:6px;
+    border:none;
+    border-radius:6px;
+    background:#22c55e;
+    cursor:pointer;
+    font-size:12px;
+}
+.offer{
+    color:#facc15;
+    font-size:11px;
+}
+
+/* REFERRAL */
+.ref-box{
+    background:linear-gradient(135deg,#020617,#1e293b);
+    padding:15px;
+    border-radius:12px;
+}
+.ref-box input{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    margin-top:8px;
+}
+.ref-box button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#38bdf8;
+    font-weight:600;
+}
+
+/* LEVEL 2 ADS */
+.ads{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+.ad{
+    background:#020617;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    filter:blur(2px);
+    position:relative;
+}
+.ad i{
+    font-size:30px;
+    margin-bottom:8px;
+}
+.lock{
+    position:absolute;
+    top:10px;
+    right:10px;
+    color:#f87171;
+}
+.ad button{
+    margin-top:8px;
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    background:#64748b;
+    color:#fff;
+}
+
+/* CHARTS */
+.chart{
+    background:#020617;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+.bar{
+    height:6px;
+    background:#22c55e;
+    border-radius:10px;
+    animation:grow 3s infinite alternate;
+}
+@keyframes grow{
+    from{width:30%;}
+    to{width:90%;}
+}
+
+/* FOOTER */
+footer{
+    padding:15px;
+    text-align:center;
+    font-size:12px;
+    opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Nep X Trading</h1>
+    <div class="profile">
+        <i class="fa-solid fa-user-lock" onclick="profileNotice()"></i>
+        <small>Level 1</small>
+        <small>ID: nepuser30</small>
+    </div>
+</header>
+
+<div class="dashboard">
+    <div class="card"><h3>Total Earning</h3><p>Rs. 12,850</p></div>
+    <div class="card"><h3>Today Earning</h3><p>Rs. 850</p></div>
+    <div class="card"><h3>Weekly Earning</h3><p>Rs. 4,200</p></div>
+    <div class="card"><h3>Referral Earning</h3><p>Rs. 1,500</p></div>
+</div>
+
+<div class="withdraw">
+    <button onclick="location.href='withdraw.html'">Withdraw Now</button>
+</div>
+
+<section>
+<h2>Trading Investments</h2>
+<div class="table">
+<div class="row header">
+    <div>Invest</div><div>Profit</div><div>Time</div><div>Action</div>
+</div>
+
+<script>
+const plans=[
+[880,1428,"15 min",""],
+[1500,2385,"10 min",""],
+[2500,3235,"20 min",""],
+[3500,4885,"30 min",""],
+[5500,7160,"10 min","🔥 OFFER"],
+[8700,12385,"5 min","🔥 OFFER"],
+[9500,15292,"10 min","🔥 OFFER"]
+];
+plans.forEach(p=>{
+document.write(`
+<div class="row">
+<div>Rs.${p[0]}<br><span class="offer">${p[3]}</span></div>
+<div>Rs.${p[1]}</div>
+<div>${p[2]}</div>
+<div><button onclick="location.href='another.html'">Invest</button></div>
+</div>
+`);
+});
+</script>
+</div>
+</section>
+
+<section>
+<h2>Earn with Referral</h2>
+<div class="ref-box">
+<p>Refer friends & earn <b>Rs.300</b> per person</p>
+<p>Your Referral Code: <b>D390</b></p>
+<input value="https://nepxtrading.com/ref/D390" readonly>
+<button onclick="share()">Refer Now</button>
+</div>
+</section>
+
+<section>
+<h2>Level 2 – Watch Ads & Earn</h2>
+<p>Earn Rs.160 per ad (Locked)</p>
+<div class="ads">
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+<div class="ad"><i class="fa-solid fa-play"></i><i class="fa-solid fa-lock lock"></i><button onclick="locked()">Watch & Earn</button></div>
+</div>
+</section>
+
+<section>
+<h2>Live Charts</h2>
+<div class="chart">Live Users <div class="bar"></div></div>
+<div class="chart">Bitcoin Price <div class="bar"></div></div>
+<div class="chart">Trading Profit <div class="bar"></div></div>
+</section>
+
+<section>
+<p>⚠ Other features will be unlocked after reaching <b>Level 2</b></p>
+<p>✅ Verified License | Secure Platform | Trusted in Nepal</p>
+</section>
+
+<footer>
+© 2025 Nep X Trading | All Rights Reserved
+</footer>
+
+<script>
+function profileNotice(){
+    alert("Profile will be unlocked at Level 2");
+}
+function locked(){
+    alert("This feature is available after Level 2");
+}
+function share(){
+    if(navigator.share){
+        navigator.share({
+            title:'Nep X Trading',
+            text:'Join & earn online in Nepal',
+            url:'https://nepxtrading.com/ref/D390'
+        });
+    }else{
+        alert("Copy and share the referral link manually");
+    }
+}
+</script>
+
+</body>
+</html>
