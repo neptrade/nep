@@ -3,443 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nep Trading | Professional Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Nep Trading Pro | Premium Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-bg: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --success-color: #22c55e;
-            --gold-color: #fbbf24;
-            --text-main: #f8fafc;
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --accent-neon: #38bdf8;
+            --accent-purple: #818cf8;
+            --text-white: #f8fafc;
             --text-dim: #94a3b8;
+            --success-glow: #22c55e;
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 50px;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-white);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- Header --- */
-        header {
+        /* Animated Background Elements */
+        .bg-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-neon);
+            filter: blur(150px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+            top: 10%;
+            left: -50px;
+        }
+
+        /* Professional Header */
+        nav {
+            backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.8);
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .heading-main {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .profile-icon {
-            font-size: 1.5rem;
+        .back-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--card-border);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
-        }
-
-        .profile-icon:hover { color: var(--accent-color); }
-
-        /* --- Layout Containers --- */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-
-        /* --- Earning Cards --- */
-        .main-earning-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid var(--accent-color);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: fadeIn 0.8s ease;
-        }
-
-        .earning-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .card:hover { transform: translateY(-5px); }
-
-        .card i {
-            font-size: 2rem;
-            color: var(--gold-color);
-        }
-
-        .card-info h4 { font-size: 0.9rem; color: var(--text-dim); }
-        .card-info p { font-size: 1.2rem; font-weight: 600; }
-
-        /* --- Buttons --- */
-        .btn-withdraw {
-            background: var(--success-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            max-width: 300px;
-            font-size: 1rem;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
-        }
-
-        .btn-withdraw:hover { transform: scale(1.05); background: #16a34a; }
-
-        /* --- Auto Trading Table --- */
-        .section-title { margin: 40px 0 20px; border-left: 4px solid var(--accent-color); padding-left: 15px; }
-
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 15px; }
-
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-        th { background: rgba(255,255,255,0.05); color: var(--accent-color); }
-
-        .offer-tag {
-            background: #ef4444;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 5px;
-        }
-
-        .btn-invest {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            border: none;
-            padding: 6px 15px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* --- Locked Content Sections --- */
-        .locked-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-        }
-
-        .locked-item {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            position: relative;
-            filter: grayscale(0.8);
-            border: 1px dashed #475569;
-        }
-
-        .lock-overlay {
-            color: var(--text-dim);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- Referral Section --- */
-        .refer-box {
-            background: linear-gradient(45deg, #1e293b, #334155);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .link-display {
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 15px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .share-btn {
-            background: #3b82f6;
-            border: none;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* --- Modals/Popups --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            border: 1px solid var(--accent-color);
-        }
-
-        .close-btn {
-            margin-top: 15px;
-            background: var(--accent-color);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-
-        .play-protect {
-            color: #34a853;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 8px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .back-btn:hover { border-color: var(--accent-neon); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Hero Earning Card */
+        .main-earning-card {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .main-earning-card .sticker {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px var(--accent-neon));
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .income-title { font-size: 1.1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .income-amount { font-size: 3rem; font-weight: 800; margin: 10px 0; color: var(--accent-neon); }
+
+        /* Secondary Grid */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card-stat {
+            background: var(--glass-bg);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card-stat:hover { transform: scale(1.03); background: rgba(56, 189, 248, 0.05); }
+        .card-stat i { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent-purple); }
+        .card-stat p { font-size: 0.8rem; color: var(--text-dim); }
+        .card-stat h3 { font-size: 1.2rem; margin-top: 5px; color: var(--text-white); }
+
+        /* Buttons */
+        .btn-withdraw {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+            margin-bottom: 40px;
+        }
+
+        /* Auto Trading Table */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .trade-table-wrapper {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: rgba(255,255,255,0.05); padding: 15px; text-align: left; color: var(--text-dim); font-size: 0.8rem; }
+        td { padding: 18px 15px; border-bottom: 1px solid var(--card-border); font-size: 0.9rem; }
+
+        .offer-tag {
+            background: #ef4444;
+            color: white;
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 5px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        .btn-table {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-neon);
+            border: 1px solid var(--accent-neon);
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Locked Sections */
+        .locked-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .locked-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            filter: grayscale(1);
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--text-dim);
+        }
+
+        /* Referral Box */
+        .refer-section {
+            background: linear-gradient(45deg, #1e293b, #334155);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid var(--accent-neon);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .heading-main { font-size: 1rem; }
-            th, td { padding: 10px; font-size: 0.8rem; }
+            .income-amount { font-size: 2rem; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            td, th { padding: 12px 8px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><i class="fas fa-chart-line"></i> NEP</div>
-        <div class="heading-main">Nep Trading</div>
-        <div class="profile-icon" onclick="showLockedPopup()"><i class="fas fa-user-circle"></i></div>
-    </header>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <button class="back-btn" onclick="history.back()"><i class="fas fa-chevron-left"></i> Home</button>
+        <div style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">NEP <span style="color:var(--accent-neon)">TRADING</span></div>
+        <i class="fas fa-bell" style="color: var(--text-dim)"></i>
+    </nav>
 
     <div class="container">
         
         <div class="main-earning-card">
-            <i class="fas fa-wallet" style="font-size: 3rem; color: var(--success-color); margin-bottom: 10px;"></i>
-            <h3>Today Earning Income</h3>
-            <h1 style="color: var(--success-color); font-size: 2.5rem; margin: 10px 0;">Npr Rs.1,200/-</h1>
-            <button class="btn-withdraw" onclick="location.href='another.html'">
-                <i class="fas fa-arrow-right-from-bracket"></i> Withdraw Now
-            </button>
-        </div>
-
-        <div class="earning-grid">
-            <div class="card">
-                <i class="fas fa-coins"></i>
-                <div class="card-info">
-                    <h4>Total Earning</h4>
-                    <p>Rs.1200/-</p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="fas fa-calendar-week"></i>
-                <div class="card-info">
-                    <h4>Weekly Earning</h4>
-                    <p>Rs.1200/-</p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="fas fa-users"></i>
-                <div class="card-info">
-                    <h4>Referral Earning</h4>
-                    <p>Rs.1200/-</p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="fas fa-money-bill-trend-up"></i>
-                <div class="card-info">
-                    <h4>Monthly Income</h4>
-                    <p>Rs.1200/-</p>
-                </div>
+            <div class="sticker">💰</div>
+            <p class="income-title">Today's Profit</p>
+            <h1 class="income-amount">NPR Rs. 1,200/-</h1>
+            <div style="color: var(--success-glow); font-size: 0.9rem;">
+                <i class="fas fa-arrow-up"></i> +12% from yesterday
             </div>
         </div>
 
-        <h2 class="section-title">Auto Trading</h2>
-        <div class="table-container">
+        <div class="grid-4">
+            <div class="card-stat">
+                <i class="fas fa-database"></i>
+                <p>Total Earning</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-bolt"></i>
+                <p>Weekly</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-user-friends"></i>
+                <p>Referral</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+            <div class="card-stat">
+                <i class="fas fa-wallet"></i>
+                <p>Monthly</p>
+                <h3>Rs. 1,200</h3>
+            </div>
+        </div>
+
+        <button class="btn-withdraw" onclick="window.location.href='another.html'">
+            <i class="fas fa-arrow-down-to-bracket"></i> WITHDRAW NOW
+        </button>
+
+        <div class="section-header">
+            <h2><i class="fas fa-robot" style="color:var(--accent-neon)"></i> Auto Trading</h2>
+            <span style="font-size: 0.8rem; color: var(--accent-neon)">Live Market</span>
+        </div>
+
+        <div class="trade-table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th>Invest</th>
-                        <th>Profit</th>
-                        <th>Time</th>
-                        <th>Action</th>
+                        <th>INVEST</th>
+                        <th>PROFIT</th>
+                        <th>TIME</th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
-                <tbody id="tradingBody">
+                <tbody id="trade-rows">
                     </tbody>
             </table>
         </div>
 
-        <h2 class="section-title">Earn by Watching Ads (Level 2 Required)</h2>
-        <div class="locked-grid" id="adsGrid"></div>
+        <div class="section-header" style="margin-top: 40px;">
+            <h2><i class="fas fa-film"></i> Watch Ads</h2>
+            <span style="color: var(--text-dim); font-size: 0.8rem;">Level 2 Req.</span>
+        </div>
+        <div class="locked-area" id="ads-grid"></div>
 
-        <h2 class="section-title">Earn by Playing Games (Level 2 Required)</h2>
-        <div class="locked-grid" id="gamesGrid"></div>
+        <div class="section-header" style="margin-top: 40px;">
+            <h2><i class="fas fa-gamepad"></i> Play Games</h2>
+        </div>
+        <div class="locked-area" id="games-grid"></div>
 
-        <div class="refer-box">
-            <i class="fas fa-gift" style="font-size: 3rem; color: var(--gold-color);"></i>
-            <h3>Refer and Earn</h3>
-            <p>Refer a person and earn up to <strong>Rs.300</strong> per refer!</p>
-            <div class="link-display">
-                <span id="webLink">https://neptrading.com/join/user77</span>
-                <button class="share-btn" onclick="shareLink()"><i class="fas fa-share-nodes"></i> Share</button>
+        <div class="refer-section">
+            <h2 style="margin-bottom: 10px;">Refer & Earn</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Invite your friends and earn Rs. 300 instantly per referral.</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px; font-family: monospace;">
+                neptrading.pro/ref?id=99283
             </div>
+            <button class="btn-table" style="padding: 12px 30px;" onclick="copyLink()">Share Link</button>
         </div>
 
-        <div class="card" style="justify-content: center; background: rgba(255,255,255,0.05); border: 1px dashed var(--text-dim);">
-            <p><i class="fas fa-lock"></i> More features will be unlocked after Level 2</p>
+        <div style="text-align: center; margin-top: 30px; color: var(--accent-purple);">
+            <i class="fas fa-circle-info"></i> More features will unlock at Level 2
         </div>
 
-    </div>
-
-    <div id="lockModal" class="modal">
-        <div class="modal-content">
-            <i class="fas fa-lock" style="font-size: 3rem; color: var(--gold-color); margin-bottom: 15px;"></i>
-            <h2>Feature Locked!</h2>
-            <p>This feature will be unlocked after you reach <strong>Level 2</strong>.</p>
-            <button class="close-btn" onclick="closePopup()">I Understand</button>
-        </div>
     </div>
 
     <footer>
-        <div class="play-protect">
-            <i class="fab fa-google-play"></i> Verified by Play Protect
+        <div style="color: #22c55e; margin-bottom: 10px;">
+            <i class="fas fa-shield-halved"></i> Verified by Play Protect
         </div>
-        <p>&copy; 2024-2026 All Rights Reserved by Nep Trading</p>
+        <p>© 2026 Nep Trading. All rights reserved.</p>
     </footer>
 
     <script>
         // Data for Trading Table
-        const tradingData = [
-            { inv: 880, profit: 1428, time: "10min", offer: false },
-            { inv: 1500, profit: 2385, time: "10min", offer: false },
-            { inv: 2500, profit: 3235, time: "10min", offer: false },
-            { inv: 3500, profit: 4885, time: "10min", offer: false },
-            { inv: 5500, profit: 7160, time: "10min", offer: true },
-            { inv: 8700, profit: 12385, time: "10min", offer: true },
-            { inv: 9500, profit: 15292, time: "10min", offer: true }
+        const tradeData = [
+            { inv: 880, prof: 1428, offer: false },
+            { inv: 1500, prof: 2385, offer: false },
+            { inv: 2500, prof: 3235, offer: false },
+            { inv: 3500, prof: 4885, offer: false },
+            { inv: 5500, prof: 7160, offer: true },
+            { inv: 8700, prof: 12385, offer: true },
+            { inv: 9500, prof: 15292, offer: true }
         ];
 
-        // Load Table
-        const tableBody = document.getElementById('tradingBody');
-        tradingData.forEach(item => {
-            const row = `<tr>
-                <td>Rs.${item.inv} ${item.offer ? '<span class="offer-tag">OFFER</span>' : ''}</td>
-                <td style="color: var(--success-color)">Rs.${item.profit}</td>
-                <td>${item.time}</td>
-                <td><button class="btn-invest" onclick="location.href='another.html'">Invest Now</button></td>
-            </tr>`;
-            tableBody.innerHTML += row;
+        const tableBody = document.getElementById('trade-rows');
+        tradeData.forEach(item => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>Rs. ${item.inv}${item.offer ? '<span class="offer-tag">HOT</span>' : ''}</td>
+                    <td style="color:var(--success-glow)">Rs. ${item.prof}</td>
+                    <td>10 min</td>
+                    <td><button class="btn-table" onclick="window.location.href='another.html'">Invest</button></td>
+                </tr>
+            `;
         });
 
-        // Load Locked Ads and Games
-        function createLockedGrid(containerId, iconClass, label) {
+        // Function to create locked boxes
+        function populateLocked(containerId, label) {
             const container = document.getElementById(containerId);
             for(let i=1; i<=10; i++) {
                 container.innerHTML += `
-                    <div class="locked-item" onclick="showLockedPopup()">
-                        <div class="lock-overlay"><i class="fas fa-lock"></i></div>
-                        <i class="${iconClass}" style="font-size: 1.5rem; margin-bottom:10px"></i>
-                        <p style="font-size:0.8rem">${label} ${i}</p>
-                        <button class="btn-invest" style="margin-top:10px; font-size:0.7rem">Watch Now</button>
+                    <div class="locked-box" onclick="alertLevel()">
+                        <i class="fas fa-lock lock-overlay"></i>
+                        <div style="font-size: 1.5rem; margin-bottom: 10px;">💎</div>
+                        <p style="font-size: 0.7rem; color: var(--text-dim)">${label} ${i}</p>
+                        <button class="btn-table" style="font-size: 0.6rem; margin-top: 10px; width: 100%">UNLOCK</button>
                     </div>
                 `;
             }
         }
-        createLockedGrid('adsGrid', 'fas fa-video', 'Ad Video');
-        createLockedGrid('gamesGrid', 'fas fa-gamepad', 'Game');
 
-        // Modal Logic
-        function showLockedPopup() {
-            document.getElementById('lockModal').style.display = 'flex';
+        populateLocked('ads-grid', 'Ad Video');
+        populateLocked('games-grid', 'Game');
+
+   <script>
+        function showLockPopup() {
+            const modal = document.getElementById('lockModal');
+            modal.classList.remove('hidden');
         }
 
         function closePopup() {
-            document.getElementById('lockModal').style.display = 'none';
+            const modal = document.getElementById('lockModal');
+            modal.classList.add('hidden');
         }
 
-        // Share Logic
-        function shareLink() {
-            const link = document.getElementById('webLink').innerText;
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Join Nep Trading',
-                    text: 'Join me on Nep Trading and earn money!',
-                    url: link,
-                });
-            } else {
-                alert("Link Copied: " + link);
+        async function shareLink() {
+            const shareData = {
+                title: 'Nep Trading',
+                text: 'Join me on Nep Trading and start earning today!',
+                url: document.getElementById('refLink').value
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // Fallback for desktop
+                    navigator.clipboard.writeText(shareData.url);
+                    alert('Link copied to clipboard! Share it with your friends.');
+                }
+            } catch (err) {
+                console.error('Error sharing:', err);
             }
         }
 
         // Close modal when clicking outside
         window.onclick = function(event) {
-            if (event.target == document.getElementById('lockModal')) {
+            const modal = document.getElementById('lockModal');
+            if (event.target == modal) {
                 closePopup();
             }
         }
