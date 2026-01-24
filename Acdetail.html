@@ -1,350 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Withdrawal | Premium Banking</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Withdrawal</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary: #22c55e;
-            --primary-hover: #16a34a;
-            --bg: #020617;
-            --card-bg: #0f172a;
-            --input-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --danger: #ef4444;
-            --border: #334155;
-        }
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+<style>
+:root{
+    --bg:#020617;
+    --card:#0f172a;
+    --input:#111827;
+    --accent:#22c55e;
+    --danger:#ef4444;
+    --text:#e5e7eb;
+    --muted:#9ca3af;
+}
 
-        body {
-            min-height: 100vh;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(34, 197, 94, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(34, 197, 94, 0.05) 0px, transparent 50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            padding: 20px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
 
-        .card {
-            width: 100%;
-            max-width: 440px;
-            background: var(--card-bg);
-            padding: 32px;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+body{
+    min-height:100vh;
+    background:radial-gradient(circle at top,#020617,#020617 60%,#020617);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text);
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
+.card{
+    width:100%;
+    max-width:420px;
+    background:linear-gradient(180deg,#020617,#0f172a);
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 30px 60px rgba(0,0,0,.7);
+}
 
-        .header .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: rgba(34, 197, 94, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-        }
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
 
-        .header i {
-            color: var(--primary);
-            font-size: 28px;
-        }
+.header i{
+    color:var(--accent);
+    font-size:26px;
+}
 
-        .header h2 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
+.header h2{
+    font-size:22px;
+    font-weight:600;
+}
 
-        .header p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-top: 4px;
-        }
+label{
+    font-size:13px;
+    color:var(--muted);
+    margin:12px 0 6px;
+    display:block;
+}
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+select,input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    background:var(--input);
+    color:var(--text);
+    font-size:14px;
+}
 
-        label {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            display: block;
-            margin-left: 4px;
-        }
+input::placeholder{
+    color:#6b7280;
+}
 
-        select, input {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            outline: none;
-            background: var(--input-bg);
-            color: var(--text-main);
-            font-size: 15px;
-            transition: all 0.2s ease;
-        }
+.amount-box{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
 
-        select:focus, input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
-        }
+.amount-box button{
+    flex:1;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid var(--accent);
+    background:transparent;
+    color:var(--accent);
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
 
-        .amount-presets {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
+.amount-box button:hover{
+    background:var(--accent);
+    color:#022c22;
+}
 
-        .amount-presets button {
-            padding: 8px 4px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-main);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.notice{
+    display:none;
+    margin-top:16px;
+    padding:14px;
+    background:rgba(239,68,68,.15);
+    border:1px solid var(--danger);
+    color:#fecaca;
+    border-radius:14px;
+    font-size:14px;
+    animation:shake .4s;
+}
 
-        .amount-presets button:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    50%{transform:translateX(5px)}
+    75%{transform:translateX(-5px)}
+    100%{transform:translateX(0)}
+}
 
-        .notice {
-            display: none;
-            margin-top: 16px;
-            padding: 12px 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid var(--danger);
-            color: #fca5a5;
-            border-radius: 8px;
-            font-size: 13px;
-            line-height: 1.5;
-            animation: fadeIn 0.3s ease;
-        }
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.actions button{
+    flex:1;
+    padding:14px;
+    border-radius:16px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
 
-        .actions {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 12px;
-            margin-top: 24px;
-        }
+.clear{
+    background:#1f2937;
+    color:#e5e7eb;
+}
 
-        .btn {
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+.withdraw{
+    background:var(--accent);
+    color:#022c22;
+}
 
-        .btn-clear {
-            background: #334155;
-            color: white;
-        }
+.withdraw i{
+    margin-right:6px;
+}
 
-        .btn-clear:hover {
-            background: #475569;
-        }
+.footer{
+    text-align:center;
+    margin-top:18px;
+    font-size:12px;
+    color:var(--muted);
+}
 
-        .btn-withdraw {
-            background: var(--primary);
-            color: #052e16;
-        }
-
-        .btn-withdraw:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-withdraw:active {
-            transform: translateY(0);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(0,0,0,0.1);
-            border-top: 2px solid #052e16;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+/* Mobile optimization */
+@media(max-width:480px){
+    .card{margin:14px}
+}
+</style>
 </head>
+
 <body>
 
 <div class="card">
     <div class="header">
-        <div class="icon-wrapper">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
+        <i class="fa-solid fa-building-columns"></i>
         <h2>Bank Withdrawal</h2>
-        <p>Transfer funds to your local bank account</p>
     </div>
 
-    <div class="form-group">
-        <label>Destination Bank</label>
-        <select id="bank">
-            <option value="">Select Bank</option>
-            <option>Esewa</option>
-            <option>LAXMI SUNRISE BANK LTD.</option>
-            <option>NABIL BANK</option>
-            <option>NIC ASIA BANK</option>
-            <option>GLOBAL IME BANK</option>
-            <option>PRIME COMMERCIAL BANK</option>
-            <option>EVEREST BANK</option>
-        </select>
+    <label>Destination Bank</label>
+    <select id="bank">
+        <option>Esewa</option>
+        <option>LAXMI SUNRISE BANK LTD.</option>
+        <option>NABIL BANK</option>
+        <option>NIC ASIA BANK</option>
+        <option>GLOBAL IME BANK</option>
+        <option>PRIME COMMERCIAL BANK</option>
+        <option>EVEREST BANK</option>
+        <option>khalti</option>
+    </select>
+
+    <label>Account Number</label>
+    <input type="text" placeholder="Enter account number">
+
+    <label>Account Holder Name</label>
+    <input type="text" placeholder="Full name">
+
+    <label>Withdrawal Amount (NPR)</label>
+    <input type="number" id="amount" placeholder="4500 - 50000">
+
+    <div class="amount-box">
+        <button onclick="setAmount(5000)">5000</button>
+        <button onclick="setAmount(10000)">10000</button>
+        <button onclick="setAmount(25000)">25000</button>
+        <button onclick="setAmount(50000)">50000</button>
     </div>
 
-    <div class="form-group">
-        <label>Account Number</label>
-        <input type="text" id="accNumber" placeholder="Enter bank account number">
+    <div class="notice" id="notice">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        You don’t have enough balance.
     </div>
-
-    <div class="form-group">
-        <label>Account Holder Name</label>
-        <input type="text" id="accName" placeholder="Enter full name">
-    </div>
-
-    <div class="form-group">
-        <label>Withdrawal Amount (NPR)</label>
-        <input type="number" id="amount" placeholder="4,500 - 50,000">
-        <div class="amount-presets">
-            <button onclick="setAmount(5000)">5k</button>
-            <button onclick="setAmount(10000)">10k</button>
-            <button onclick="setAmount(25000)">25k</button>
-            <button onclick="setAmount(50000)">50k</button>
-        </div>
-    </div>
-
-    <div class="notice" id="notice"></div>
 
     <div class="actions">
-        <button class="btn btn-clear" onclick="clearForm()">Clear</button>
-        <button class="btn btn-withdraw" id="withdrawBtn" onclick="processWithdrawal()">
-            <span class="spinner" id="loader"></span>
-            <i class="fa-solid fa-paper-plane" id="btnIcon"></i>
-            <span id="btnText">Withdraw</span>
+        <button class="clear" onclick="clearForm()">Clear</button>
+        <button class="withdraw" onclick="withdraw()">
+            <i class="fa-solid fa-money-bill-transfer"></i> Withdraw
         </button>
     </div>
 
     <div class="footer">
-        <i class="fa-solid fa-lock"></i>
-        Secured by End-to-End Encryption
+        🔒 Secure & Encrypted Transaction
     </div>
 </div>
 
 <script>
+function setAmount(val){
+    document.getElementById("amount").value = val;
+}
+
+function clearForm(){
+    document.querySelectorAll("input").forEach(i=>i.value="");
+    document.getElementById("notice").style.display="none";
+}
+
+function withdraw(){
+    const amount = Number(document.getElementById("amount").value);
     const notice = document.getElementById("notice");
-    const loader = document.getElementById("loader");
-    const btnIcon = document.getElementById("btnIcon");
-    const btnText = document.getElementById("btnText");
 
-    function setAmount(val) {
-        document.getElementById("amount").value = val;
-        notice.style.display = "none";
+    if(amount < 4500 || amount > 50000){
+        notice.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Withdrawal limit is 4,500 – 50,000 NPR.';
+        notice.style.display="block";
+        return;
     }
 
-    function clearForm() {
-        document.querySelectorAll("input").forEach(i => i.value = "");
-        document.getElementById("bank").selectedIndex = 0;
-        notice.style.display = "none";
-    }
-
-    function showError(msg) {
-        notice.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`;
-        notice.style.display = "block";
-        notice.style.background = "rgba(239, 68, 68, 0.1)";
-        notice.style.color = "#fca5a5";
-        notice.style.borderColor = "var(--danger)";
-    }
-
-    function processWithdrawal() {
-        const amount = Number(document.getElementById("amount").value);
-        const bank = document.getElementById("bank").value;
-        const accNum = document.getElementById("accNumber").value;
-        const accName = document.getElementById("accName").value;
-
-        // Validation
-        if (!bank || !accNum || !accName || !amount) {
-            showError("Please fill in all fields correctly.");
-            return;
-        }
-
-        if (amount < 4500 || amount > 50000) {
-            showError("Withdrawal limit is 4,500 – 50,000 NPR.");
-            return;
-        }
-
-        // Professional Loading State
-        loader.style.display = "block";
-        btnIcon.style.display = "none";
-        btnText.innerText = "Processing...";
-        document.getElementById("withdrawBtn").style.pointerEvents = "none";
-        document.getElementById("withdrawBtn").style.opacity = "0.7";
-
-        // Artificial delay for professional feel before redirecting
-        setTimeout(() => {
-            window.location.href = "another.html";
-        }, 1500);
-    }
+    // Always show insufficient balance as requested
+    notice.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> You don’t have enough balance.';
+    notice.style.display="block";
+}
 </script>
 
 </body>
 </html>
+
